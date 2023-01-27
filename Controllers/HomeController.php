@@ -3,6 +3,8 @@
 namespace AFInfinite\Controllers;
 use AFInfinite\Mvc\Controller;
 use AFInfinite\Models\TestModel;
+use AFInfinite\Mvc\ViewResult;
+use AFInfinite\Mvc\IActionResult;
 
 class HomeController extends Controller {
     
@@ -10,8 +12,8 @@ class HomeController extends Controller {
         
     }
     
-    public function Test(TestModel $model) {
-        
+    public function Test(TestModel $model) : IActionResult {
+        return new ViewResult($model);
     }
     
     public function Return(int $id = 0) : string {

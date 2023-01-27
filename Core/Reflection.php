@@ -5,9 +5,18 @@ use ReflectionClass;
 
 class Reflection {
     
+    public static function GetTypeName(object $object) : string {
+        return get_class($object);
+    }
+    
     public static function SetPropertyValue(object $object, string $property, $value) {
         $reflect  = new ReflectionClass($object);
         $reflect->getProperty($property)->setValue($object, $value);
+    }
+    
+    public static function GetProperty(object $object, string $property) {
+        $reflect = new ReflectionClass($object);
+        return $reflect->getProperty($property)->getValue($object);
     }
     
     public static function GetProperties(string $typeName) : array {

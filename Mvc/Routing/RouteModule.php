@@ -38,6 +38,10 @@ class RouteModule implements IHttpModule, IEventHandler {
         if ($requestContext->HasResult()) {
             $requestContext->GetActionResult()->Render();
         }
+        else {
+            $fileName = __DIR__ . "\\..\\..\\Views\\" . $requestContext->GetController() . "\\" . $requestContext->GetAction() . ".php";
+            echo file_get_contents($fileName);
+        }
     }
     
     private function MatchRequestToRoute(RequestContext $requestContext) {

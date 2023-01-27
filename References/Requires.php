@@ -37,7 +37,9 @@
     require __DIR__ . "/../Mvc/DefaultControllerFactory.php";
     require __DIR__ . "/../Mvc/AFInfiniteApp.php";
 
+    require __DIR__ . "/../Mvc/ActionResult.php";
     require __DIR__ . "/../Mvc/NonViewResult.php";
-    
+    require __DIR__ . "/../Mvc/ViewResult.php";
+
     require __DIR__ . "/../Models/TestModel.php";
     require __DIR__ . "/../Controllers/HomeController.php";

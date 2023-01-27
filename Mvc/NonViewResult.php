@@ -2,7 +2,7 @@
 
 namespace AFInfinite\Mvc;
 
-class NonViewResult implements IActionResult {
+class NonViewResult extends ActionResult {
     
     private $Result;
     

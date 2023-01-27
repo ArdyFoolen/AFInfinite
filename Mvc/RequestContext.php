@@ -89,8 +89,9 @@ class RequestContext {
         return isset($this->ActionResult);
     }
     
-    public function SetActionResult(IActionResult $actionResult) {
+    public function SetActionResult(ActionResult $actionResult) {
         if (isset($actionResult)) {
+            $actionResult->SetRequestContext($this);
             $this->ActionResult = $actionResult;
         }
     }
