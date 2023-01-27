@@ -1,8 +1,8 @@
-        <?php
-            require __DIR__ . '/References/Requires.php';
-            use AFInfinite\Mvc\Routing\RouteTable;
-            use AFInfinite\Mvc\AFInfiniteApp;
+<?php
+    require __DIR__ . '/References/Requires.php';
+    use AFInfinite\Mvc\Routing\RouteTable;
+    use AFInfinite\Mvc\AFInfiniteApp;
 
-            $app = new AFInfiniteApp();
-            $app->Run();
-        ?>
+    $rootPath = __DIR__;
+    $app = new AFInfiniteApp();
+    $app->Run();

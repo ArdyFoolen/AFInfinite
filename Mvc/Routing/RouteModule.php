@@ -6,6 +6,7 @@ use AFInfinite\Mvc\Routing\RouteCollection;
 use AFInfinite\Mvc\Application;
 use AFInfinite\Mvc\RequestContext;
 use AFInfinite\Mvc\IEventHandler;
+use AFInfinite\Core\Directory;
 
 class RouteModule implements IHttpModule, IEventHandler {
     
@@ -39,7 +40,8 @@ class RouteModule implements IHttpModule, IEventHandler {
             $requestContext->GetActionResult()->Render();
         }
         else {
-            $fileName = __DIR__ . "\\..\\..\\Views\\" . $requestContext->GetController() . "\\" . $requestContext->GetAction() . ".php";
+            global $rootPath;
+            $fileName = Directory::ScanRecursive($rootPath . "/Views/", array($requestContext->GetController(), $requestContext->GetAction() . ".php"));
             echo file_get_contents($fileName);
         }
     }

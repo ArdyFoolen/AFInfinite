@@ -44,15 +44,33 @@ class MatchingRouteEntry {
     public function Match(RequestContext $requestContext) : bool {
         foreach (RouteTable::$Routes->Routes as $route) {
             $this->Route = $route;
-            $requestData = $this->GetRequestData($requestContext);
+            $requestData = array_filter($this->GetRequestData($requestContext));
             $routeData = explode("/", $route->GetUrl());
-            
-            if ($this->IsMatch($routeData, $requestData)) {
-                $requestContext->SetMatchingRoute($this);
-                return true;
+
+            if (!$this->IgnoreRoute($route, $routeData, $requestData)) {
+                if ($this->IsMatch($routeData, $requestData)) {
+                    $requestContext->SetMatchingRoute($this);
+                    return true;
+                }
+            }
+            else {
+                return false;
             }
         }
 
+        return false;
+    }
+
+    private function IgnoreRoute(Route $route, array $routeData, array $requestData) : bool {
+        if ($route->Ignore() && count($routeData) === count($requestData)) {
+            for ($index = 0; $index < count($requestData); $index += 1) {
+                $match = preg_match('/(?i)(' . $routeData[$index] . ')/', $requestData[$index]);
+                if ($match !== 1) {
+                    return false;
+                }
+            }
+            return true;
+        }
         return false;
     }
     
@@ -77,6 +95,12 @@ class MatchingRouteEntry {
         }
 
         for ($index = count($requestData); $index < count($routeData); $index += 1) {
+            if ($this->IfDefaultControllerSet($routeData[$index])) {
+                continue;
+            }
+            if ($this->IfDefaultActionSet($routeData[$index])) {
+                continue;
+            }
             if ($this->IsOptionalParameter($routeData[$index])) {
                 continue;
             }
@@ -95,9 +119,25 @@ class MatchingRouteEntry {
         return false;
     }
     
+    private function IfDefaultControllerSet(string $routeParm) : bool {
+        if ($routeParm === "{" . Route::Controller . "}") {
+            $this->SetController($this->Route->GetDefaults()[Route::Controller]);
+            return true;
+        }
+        return false;
+    }
+    
     private function IfActionSet(string $routeParm, string $requestParm) : bool {
         if ($routeParm === "{" . Route::Action . "}") {
             $this->SetAction($requestParm);
+            return true;
+        }
+        return false;
+    }
+    
+    private function IfDefaultActionSet(string $routeParm) : bool {
+        if ($routeParm === "{" . Route::Action . "}") {
+            $this->SetAction($this->Route->GetDefaults()[Route::Action]);
             return true;
         }
         return false;

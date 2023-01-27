@@ -4,9 +4,9 @@ namespace AFInfinite\Models;
 
 class TestModel {
     
-    public int $Id;
-    public string $Name;
-    public string $Address;
-    public int $HouseNumber;
+    public int $Id = 0;
+    public string $Name = '';
+    public string $Address = '';
+    public int $HouseNumber = 0;
     
 }

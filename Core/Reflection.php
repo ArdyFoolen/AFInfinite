@@ -14,6 +14,10 @@ class Reflection {
         $reflect->getProperty($property)->setValue($object, $value);
     }
     
+    public static function HasProperty(object $object, string $property) : bool {
+        $reflect = new ReflectionClass($object);
+        return $reflect->getProperty($property) !== null;
+    }
     public static function GetProperty(object $object, string $property) {
         $reflect = new ReflectionClass($object);
         return $reflect->getProperty($property)->getValue($object);

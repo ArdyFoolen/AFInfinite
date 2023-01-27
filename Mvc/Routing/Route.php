@@ -11,10 +11,11 @@ class Route {
     private string $Name = "";
     private string $Url = "";
     private array $Defaults = array();
+    private bool $Ignore = false;
     
-    public function __construct(IRouteHandler $routeHandler, string $name) {
-        $this->RouteHandler = $routeHandler;
+    public function __construct(string $name, bool $ignore = false) {
         $this->Name = $name;
+        $this->Ignore = $ignore;
     }
     
     public function GetUrl() : string {
@@ -33,5 +34,12 @@ class Route {
     
     public function GetRouteHandler() : IRouteHandler {
         return $this->RouteHandler;
+    }
+    public function SetRouteHandler(IRouteHandler $routeHandler) {
+        $this->RouteHandler = $routeHandler;
+    }
+    
+    public function Ignore() : bool {
+        return $this->Ignore;
     }
 }

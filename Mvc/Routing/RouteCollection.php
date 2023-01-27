@@ -10,7 +10,22 @@ class RouteCollection {
         $ini_array = parse_ini_file(__DIR__ . "/../../Config/Routing.ini", true);
 
         foreach ($ini_array as $key => $value) {
-            $this->MapRoute($key, $value['url'], $value['defaults']);
+            if ($key === 'Ignores') {
+                $this->IgnoreRoutes($value['urls']);
+            }
+            else {
+                $this->MapRoute($key, $value['url'], $value['defaults']);
+            }
+        }
+    }
+    
+    private function IgnoreRoutes(array $urls) {
+        
+        foreach ($urls as $url) {
+            $this->Routes[] = (new RouteBuilder())
+                ->Ignore()
+                ->WithUrl($url)
+                ->Build();
         }
     }
     

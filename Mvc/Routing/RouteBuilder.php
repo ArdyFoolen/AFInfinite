@@ -5,13 +5,19 @@ namespace AFInfinite\Mvc\Routing;
 class RouteBuilder {
     
     private Route $Route;
-    private IRouteHandler $RouteHandler;
     private string $Name;
+    private bool $Ignore = false;
     
     private function SetRoute() {
-        if (!isset($this->Route) && isset($this->Name) && isset($this->RouteHandler)) {
-            $this->Route = new Route($this->RouteHandler, $this->Name, );
+        if (!$this->Ignore && !isset($this->Route) && isset($this->Name)) {
+            $this->Route = new Route($this->Name);
         }
+    }
+    
+    public function Ignore() : RouteBuilder {
+        $this->Ignore = true;
+        $this->Route = new Route('', true);
+        return $this;
     }
     
     public function WithName(string $name) : RouteBuilder {
@@ -21,8 +27,11 @@ class RouteBuilder {
     }
     
     public function WithRouteHandler(IRouteHandler $routeHandler) : RouteBuilder {
-        $this->RouteHandler = $routeHandler;
-        $this->SetRoute();
+        if (!isset($this->Route)) {
+            return $this;
+        }
+
+        $this->Route->SetRouteHandler($routeHandler);
         return $this;
     }
     
