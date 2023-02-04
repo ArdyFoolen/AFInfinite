@@ -18,6 +18,8 @@ class RequestContext {
     private string $Action;
     private array $Parameters = [];
 
+    private IController $Controller;
+    private IActionInvoker $ActionInvoker;
     private IActionResult $ActionResult;
     
     public function GetHttpMethod() : string {
@@ -100,5 +102,25 @@ class RequestContext {
         if ($this->HasResult()) {
             return $this->ActionResult;
         }
+    }
+    
+    public function GetController() : IController {
+        if (isset($this->Controller)) {
+            return $this->Controller;
+        }
+        throw new Exception();
+    }
+    public function SetController(IController $controller) {
+        $this->Controller = $controller;
+    }
+    
+    public function GetActionInvoker() : IActionInvoker {
+        if (isset($this->ActionInvoker)) {
+            return $this->ActionInvoker;
+        }
+        throw new Exception();
+    }
+    public function SetActionInvoker(IActionInvoker $actionInvoker) {
+        $this->ActionInvoker = $actionInvoker;
     }
 }

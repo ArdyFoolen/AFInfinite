@@ -11,12 +11,11 @@ class HttpHandler implements IHttpHandler {
     
     public function ProcessRequest() {
         
-        $factory = ControllerBuilder::GetCurrent();
-        $controller = $factory->CreateController($this->RequestContext, $this->RequestContext->GetControllerName());
-        $actionInvoker = $controller->CreateActionInvoker();
-        $actionInvoker->Execute();
-        if ($actionInvoker->HasResult()) {
-            $this->RequestContext->SetActionResult($actionInvoker->GetActionResult());
-        }
+        (new ControllerBuilder())
+                ->UseFactory()
+                ->WithRequestContext($this->RequestContext)
+                ->CreateController()
+                ->CreateActionInvoker()
+                ->Execute();
     }
 }
