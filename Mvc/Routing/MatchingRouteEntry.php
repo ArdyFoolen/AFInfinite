@@ -6,7 +6,7 @@ use AFInfinite\Mvc\RequestContext;
 class MatchingRouteEntry {
     
     private Route $Route;
-    private string $Controller;
+    private string $ControllerName;
     private string $Action;
     private array $Parameters = [];
 
@@ -17,14 +17,14 @@ class MatchingRouteEntry {
         return $this->Route;
     }
 
-    public function GetController() : string {
-        if (!isset($this->Controller)) {
+    public function GetControllerName() : string {
+        if (!isset($this->ControllerName)) {
             return $this->Route->GetDefaults()[Route::Controller];
         }
-        return $this->Controller;
+        return $this->ControllerName;
     }
-    private function SetController(string $controller) {
-        $this->Controller = $controller;
+    private function SetControllerName(string $controllerName) {
+        $this->ControllerName = $controllerName;
     }
 
     public function GetAction() : string {
@@ -113,7 +113,7 @@ class MatchingRouteEntry {
     
     private function IfControllerSet(string $routeParm, string $requestParm) : bool {
         if ($routeParm === "{" . Route::Controller . "}") {
-            $this->SetController($requestParm);
+            $this->SetControllerName($requestParm);
             return true;
         }
         return false;
@@ -121,7 +121,7 @@ class MatchingRouteEntry {
     
     private function IfDefaultControllerSet(string $routeParm) : bool {
         if ($routeParm === "{" . Route::Controller . "}") {
-            $this->SetController($this->Route->GetDefaults()[Route::Controller]);
+            $this->SetControllerName($this->Route->GetDefaults()[Route::Controller]);
             return true;
         }
         return false;

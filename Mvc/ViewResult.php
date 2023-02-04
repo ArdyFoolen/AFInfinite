@@ -14,7 +14,7 @@ class ViewResult extends ActionResult {
     
     public function Render() {
         global $rootPath;
-        $fileName = Directory::ScanRecursive($rootPath . "/Views/", array($this->RequestContext->GetController(), $this->RequestContext->GetAction() . ".php"));
+        $fileName = Directory::ScanRecursive($rootPath . "/Views/", array($this->RequestContext->GetControllerName(), $this->RequestContext->GetAction() . ".php"));
         $contents = file_get_contents($fileName);
 
         $typeName = Reflection::GetTypeName($this->Model);

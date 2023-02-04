@@ -41,7 +41,7 @@ class RouteModule implements IHttpModule, IEventHandler {
         }
         else {
             global $rootPath;
-            $fileName = Directory::ScanRecursive($rootPath . "/Views/", array($requestContext->GetController(), $requestContext->GetAction() . ".php"));
+            $fileName = Directory::ScanRecursive($rootPath . "/Views/", array($requestContext->GetControllerName(), $requestContext->GetAction() . ".php"));
             echo file_get_contents($fileName);
         }
     }

@@ -14,7 +14,7 @@ class RequestContext {
     private array $QueryString = array();
     
     private Route $Route;
-    private string $Controller;
+    private string $ControllerName;
     private string $Action;
     private array $Parameters = [];
 
@@ -64,7 +64,7 @@ class RequestContext {
     
     public function SetMatchingRoute(MatchingRouteEntry $matchingRoute) {
         $this->Route = $matchingRoute->GetRoute();
-        $this->Controller = $matchingRoute->GetController();
+        $this->ControllerName = $matchingRoute->GetControllerName();
         $this->Action = $matchingRoute->GetAction();
         $this->Parameters = $matchingRoute->GetParameters();
     }
@@ -73,8 +73,8 @@ class RequestContext {
         return $this->Route;
     }
 
-    public function GetController() : string {
-        return $this->Controller;
+    public function GetControllerName() : string {
+        return $this->ControllerName;
     }
 
     public function GetAction() : string {
