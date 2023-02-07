@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Test</title>
-    </head>
-    <body>
-        <h1>Test</h1>
-        <p>Id: $model->Id</p>
-        <p>Name: $model->Name</p>
-        <p>Address: $model->Address</p>
-        <p>Housenumber: $model->HouseNumber</p>
-    </body>
-</html>
+<h1>Test</h1>
+<p>Id: <?php echo $this->Model->Id ?></p>
+<p>Name: <?php echo $this->Model->Name ?></p>
+<p>Address: <?php echo $this->Model->Address ?></p>
+<p>Housenumber: <?php echo $this->Model->HouseNumber ?></p>
