@@ -10,12 +10,7 @@ class NonViewResult extends ActionResult {
         $this->Result = $result;
     }
     
-    public function Render() {
-        global $rootPath;
-        require $rootPath . "/Views/Shared/Layout.php";
-    }
-    
-    private function RenderBody() {
+    protected function RenderBody() {
         echo $this->Result;
     }
 

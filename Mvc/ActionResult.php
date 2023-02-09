@@ -10,5 +10,10 @@ abstract class ActionResult implements IActionResult {
         $this->RequestContext = $requestContext;
     }
     
-    public abstract function Render();
+    public function Render() {
+        global $rootPath;
+        require $rootPath . "/Views/Shared/Layout.php";
+    }
+
+    protected abstract function RenderBody();
 }

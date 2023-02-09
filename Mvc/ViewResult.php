@@ -12,12 +12,7 @@ class ViewResult extends ActionResult {
         $this->Model = $model;
     }
     
-    public function Render() {
-        global $rootPath;
-        require $rootPath . "/Views/Shared/Layout.php";
-    }
-    
-    private function RenderBody() {
+    protected function RenderBody() {
         global $rootPath;
         $fileName = Directory::ScanRecursive($rootPath . "/Views/", array($this->RequestContext->GetControllerName(), $this->RequestContext->GetAction() . ".php"));
         require $fileName;
