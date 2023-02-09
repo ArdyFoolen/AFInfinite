@@ -5,14 +5,18 @@ namespace AFInfinite\Mvc;
 abstract class ActionResult implements IActionResult {
 
     protected RequestContext $RequestContext;
+    protected string $LayoutFileName;
     
+    public function SetLayout(string $fileName) {
+        $this->LayoutFileName = $fileName;
+    }
+
     public function SetRequestContext(RequestContext $requestContext) {
         $this->RequestContext = $requestContext;
     }
     
     public function Render() {
-        global $rootPath;
-        require $rootPath . "/Views/Shared/Layout.php";
+        require $this->LayoutFileName;
     }
 
     protected abstract function RenderBody();

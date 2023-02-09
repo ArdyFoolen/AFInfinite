@@ -14,7 +14,7 @@ class ViewResult extends ActionResult {
     
     protected function RenderBody() {
         global $rootPath;
-        $fileName = Directory::ScanRecursive($rootPath . "/Views/", array($this->RequestContext->GetControllerName(), $this->RequestContext->GetAction() . ".php"));
+        $fileName = Directory::ScanRecursive($rootPath . "/Views", array($this->RequestContext->GetControllerName(), $this->RequestContext->GetAction() . ".php"));
         require $fileName;
     }
 }

@@ -14,6 +14,8 @@ class PageRenderer implements IPageRenderer {
     private $ActionReturnValue;
     private bool $ActionHasReturnType;
     
+    private string $LayoutFileName;
+    
     public function __construct(string $controllerName, string $action, $actionReturnValue, bool $actionHasReturnType) {
         $this->ControllerName = $controllerName;
         $this->Action = $action;
@@ -22,12 +24,25 @@ class PageRenderer implements IPageRenderer {
     }
     
     public function Render(RequestContext $requestContext) {
+        $this->GetLayout();
         if ($this->ActionHasReturnType) {
             $this->RenderActionWithReturnType($requestContext);
         }
         else {
             $this->RenderActionWithoutReturnType();
         }
+    }
+
+    private function GetLayout() {
+        global $rootPath;
+        $fileName = Directory::ScanRecursive($rootPath . "/Views", array($this->ControllerName, "Layout.php"));
+        if ($fileName === false) {
+            $fileName = Directory::ScanRecursive($rootPath . "/Views", array("Shared", "Layout.php"));
+            if ($fileName === false) {
+                throw new Exception();
+            }
+        }
+        $this->LayoutFileName = $fileName;
     }
 
     private function RenderActionWithReturnType(RequestContext $requestContext) {
@@ -41,17 +56,19 @@ class PageRenderer implements IPageRenderer {
     
     private function RenderActionWithoutReturnType() {
         global $rootPath;
-        $fileName = Directory::ScanRecursive($rootPath . "/Views/", array($this->ControllerName, $this->Action . ".php"));
+        $fileName = Directory::ScanRecursive($rootPath . "/Views", array($this->ControllerName, $this->Action . ".php"));
         $this->RenderNonViewResult(file_get_contents($fileName));
     }
     
     private function RenderActionResult(RequestContext $requestContext) {
+        $this->ActionReturnValue->SetLayout($this->LayoutFileName);
         $this->ActionReturnValue->SetRequestContext($requestContext);
         $this->ActionReturnValue->Render();
     }
     
     private function RenderNonViewResult(string $content) {
         $result = new NonViewResult();
+        $result->SetLayout($this->LayoutFileName);
         $result->SetResult($content);
         $result->Render();
     }
