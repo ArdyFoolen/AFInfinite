@@ -36,14 +36,7 @@ class RouteModule implements IHttpModule, IEventHandler {
     }
     
     public function EndRequest(RequestContext $requestContext) {
-        if ($requestContext->HasResult()) {
-            $requestContext->GetActionResult()->Render();
-        }
-        else {
-            global $rootPath;
-            $fileName = Directory::ScanRecursive($rootPath . "/Views/", array($requestContext->GetControllerName(), $requestContext->GetAction() . ".php"));
-            echo file_get_contents($fileName);
-        }
+        $requestContext->GetPageRenderer()->Render($requestContext);
     }
     
     private function MatchRequestToRoute(RequestContext $requestContext) {

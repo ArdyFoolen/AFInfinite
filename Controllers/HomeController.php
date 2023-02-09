@@ -19,4 +19,8 @@ class HomeController extends Controller {
     public function Return(int $id = 0) : string {
         return "This is a NonViewResult of " . $id;
     }
+    
+    public function NoParameters() : string {
+        return "This is a NonViewResult with NO parameters";
+    }
 }

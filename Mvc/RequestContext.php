@@ -3,6 +3,7 @@
 namespace AFInfinite\Mvc;
 use AFInfinite\Mvc\Routing\MatchingRouteEntry;
 use AFInfinite\Mvc\Routing\Route;
+use AFInfinite\Mvc\Rendering\IPageRenderer;
 
 class RequestContext {
     
@@ -20,7 +21,7 @@ class RequestContext {
 
     private IController $Controller;
     private IActionInvoker $ActionInvoker;
-    private IActionResult $ActionResult;
+    private IPageRenderer $PageRenderer;
     
     public function GetHttpMethod() : string {
         return $this->HttpMethod;
@@ -86,21 +87,16 @@ class RequestContext {
     public function GetParameters() : array {
         return $this->Parameters;
     }
-    
-    public function HasResult() : bool {
-        return isset($this->ActionResult);
-    }
-    
-    public function SetActionResult(ActionResult $actionResult) {
-        if (isset($actionResult)) {
-            $actionResult->SetRequestContext($this);
-            $this->ActionResult = $actionResult;
+
+    public function SetPageRenderer(IPageRenderer $pageRenderer) {
+        if (isset($pageRenderer)) {
+            $this->PageRenderer = $pageRenderer;
         }
     }
 
-    public function GetActionResult() : IActionResult {
-        if ($this->HasResult()) {
-            return $this->ActionResult;
+    public function GetPageRenderer() : IPageRenderer {
+        if (isset($this->PageRenderer)) {
+            return $this->PageRenderer;
         }
     }
     

@@ -6,6 +6,10 @@ class Controller implements IController {
     
     private RequestContext $RequestContext;
     
+    public function GetName() : string {
+        return $this->RequestContext->GetControllerName();
+    }
+
     public function Initialize(RequestContext $requestContext) {
         $this->RequestContext = $requestContext;
     }

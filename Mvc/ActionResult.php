@@ -9,4 +9,6 @@ abstract class ActionResult implements IActionResult {
     public function SetRequestContext(RequestContext $requestContext) {
         $this->RequestContext = $requestContext;
     }
+    
+    public abstract function Render();
 }

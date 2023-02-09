@@ -22,6 +22,9 @@
     require __DIR__ . "/../Mvc/RequestContextBuilder.php";
     require __DIR__ . "/../Mvc/Routing/RouteConfig.php";
 
+    require __DIR__ . "/../Mvc/Rendering/IPageRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/PageRenderer.php";
+
     require __DIR__ . "/../Mvc/IParameterBinderProvider.php";
     require __DIR__ . "/../Mvc/ParameterBinderProvider.php";
     require __DIR__ . "/../Mvc/ParameterBinder.php";

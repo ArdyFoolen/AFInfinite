@@ -1,6 +1,7 @@
 <?php
 
 namespace AFInfinite\Mvc;
+use AFInfinite\Mvc\Rendering\IPageRenderer;
 
 class ControllerBuilder {
     
@@ -43,9 +44,7 @@ class ControllerBuilder {
     
     public function Execute() {
         $actionInvoker = $this->RequestContext->GetActionInvoker();
-        $actionInvoker->Execute();
-        if ($actionInvoker->HasResult()) {
-            $this->RequestContext->SetActionResult($actionInvoker->GetActionResult());
-        }
+        $renderer = $actionInvoker->Execute();
+        $this->RequestContext->SetPageRenderer($renderer);
     }
 }
