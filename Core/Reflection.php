@@ -41,7 +41,7 @@ class Reflection {
         {
             $reflection = new ReflectionClass($className);
             return $reflection->implementsInterface($interface);
-        } catch (ReflectionException) {
+        } catch (ReflectionException $ex) {
             return false;
         }
     }
