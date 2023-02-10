@@ -32,6 +32,9 @@
     require __DIR__ . "/../Mvc/DefaultParameterBinder.php";
     require __DIR__ . "/../Mvc/IActionInvoker.php";
     require __DIR__ . "/../Mvc/ActionInvoker.php";
+    require __DIR__ . "/../Mvc/ActionResultInvoker.php";
+    require __DIR__ . "/../Mvc/ActionNoResultInvoker.php";
+    require __DIR__ . "/../Mvc/ActionSpecificInvoker.php";
 
     require __DIR__ . "/../Mvc/Routing/RouteBuilder.php";
     require __DIR__ . "/../Mvc/Routing/RouteCollection.php";
@@ -44,6 +47,7 @@
     require __DIR__ . "/../Mvc/ActionResult.php";
     require __DIR__ . "/../Mvc/NonViewResult.php";
     require __DIR__ . "/../Mvc/ViewResult.php";
+    require __DIR__ . "/../Mvc/ActionInvokerFactory.php";
 
     require __DIR__ . "/../Models/TestModel.php";
     require __DIR__ . "/../Controllers/HomeController.php";

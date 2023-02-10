@@ -4,33 +4,28 @@ namespace AFInfinite\Mvc\Rendering;
 use AFInfinite\Core\Reflection;
 use AFInfinite\Mvc\RequestContext;
 use AFInfinite\Core\Directory;
-use AFInfinite\Mvc\NonViewResult;
+use AFInfinite\Mvc\IActionResult;
 
 class PageRenderer implements IPageRenderer {
     
     private string $ControllerName;
     private string $Action;
-    
-    private $ActionReturnValue;
-    private bool $ActionHasReturnType;
+
+    private IActionResult $ActionResult;
     
     private string $LayoutFileName;
     
-    public function __construct(string $controllerName, string $action, $actionReturnValue, bool $actionHasReturnType) {
+    public function __construct(string $controllerName, string $action, IActionResult $actionResult) {
         $this->ControllerName = $controllerName;
         $this->Action = $action;
-        $this->ActionReturnValue = $actionReturnValue;
-        $this->ActionHasReturnType = $actionHasReturnType;
+        $this->ActionResult = $actionResult;
     }
     
     public function Render(RequestContext $requestContext) {
         $this->GetLayout();
-        if ($this->ActionHasReturnType) {
-            $this->RenderActionWithReturnType($requestContext);
-        }
-        else {
-            $this->RenderActionWithoutReturnType();
-        }
+        $this->ActionResult->SetLayout($this->LayoutFileName);
+        $this->ActionResult->SetRequestContext($requestContext);
+        $this->ActionResult->Render();
     }
 
     private function GetLayout() {
@@ -43,33 +38,5 @@ class PageRenderer implements IPageRenderer {
             }
         }
         $this->LayoutFileName = $fileName;
-    }
-
-    private function RenderActionWithReturnType(RequestContext $requestContext) {
-        if (Reflection::Implements($this->ActionReturnValue, 'AFInfinite\Mvc\IActionResult')) {
-            $this->RenderActionResult($requestContext);
-        }
-        else {
-            $this->RenderNonViewResult($this->ActionReturnValue);
-        }
-    }
-    
-    private function RenderActionWithoutReturnType() {
-        global $rootPath;
-        $fileName = Directory::ScanRecursive($rootPath . "/Views", array($this->ControllerName, $this->Action . ".php"));
-        $this->RenderNonViewResult(file_get_contents($fileName));
-    }
-    
-    private function RenderActionResult(RequestContext $requestContext) {
-        $this->ActionReturnValue->SetLayout($this->LayoutFileName);
-        $this->ActionReturnValue->SetRequestContext($requestContext);
-        $this->ActionReturnValue->Render();
-    }
-    
-    private function RenderNonViewResult(string $content) {
-        $result = new NonViewResult();
-        $result->SetLayout($this->LayoutFileName);
-        $result->SetResult($content);
-        $result->Render();
     }
 }

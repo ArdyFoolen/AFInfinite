@@ -5,52 +5,31 @@ use ReflectionMethod;
 use ReflectionParameter;
 use AFInfinite\Core\Activator;
 use AFInfinite\Core\Reflection;
-use AFInfinite\Mvc\Rendering\IPageRenderer;
-use AFInfinite\Mvc\Rendering\PageRenderer;
 
-class ActionInvoker implements IActionInvoker {
+abstract class ActionInvoker implements IActionInvoker {
     
     private IParameterBinderProvider $Provider;
-    private IController $Controller;
-    private string $Action;
+    protected IController $Controller;
+    protected string $Action;
     private array $Parameters;
 
-    private bool $HasReturnType = false;
-    private $ReturnValue = null;
-    
-    private IActionResult $ActionResult;
-
-    public function __construct(IController $controller, IParameterBinderProvider $provider) {
-        $this->Provider = $provider;
+    public function __construct(IController $controller, string $action, IParameterBinderProvider $provider) {
         $this->Controller = $controller;
-    }
-
-    public function GetHasReturnType() : bool {
-        return $this->HasReturnType;
-    }
-    public function GetReturnValue() {
-        return $this->ReturnValue;
+        $this->Action = $action;
+        $this->Provider = $provider;
     }
     
     public function Initialize(RequestContext $requestContext) {
-        $this->Action = $requestContext->GetAction();
         $this->Parameters = array_change_key_case(array_merge($requestContext->GetParameters(), $requestContext->GetQueryString()), CASE_LOWER);
     }
-    
-    public function HasResult() : bool {
-        return isset($this->ActionResult);
-    }
 
-    public function GetActionResult() : IActionResult {
-        return $this->ActionResult;
-    }
+    protected abstract function GetActionResult($returnValue) : IActionResult;
     
-    public function Execute() : IPageRenderer {
+    public function Execute() : IActionResult {
         $method = $this->GetMethod();
         $values = $this->BindParameters($method);
-        $this->ReturnValue = $method->invokeArgs($this->Controller, $values);
-        $this->HasReturnType = $method->hasReturnType();
-        return new PageRenderer($this->Controller->GetName(), $this->Action, $this->ReturnValue, $this->HasReturnType);
+        $returnValue = $method->invokeArgs($this->Controller, $values);
+        return $this->GetActionResult($returnValue);
     }
 
     private function GetMethod() : ReflectionMethod {

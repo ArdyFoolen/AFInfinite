@@ -1,0 +1,22 @@
+<?php
+
+namespace AFInfinite\Mvc;
+use AFInfinite\Core\Directory;
+
+class ActionNoResultInvoker extends ActionInvoker {
+    public function __construct(IController $controller, string $action, IParameterBinderProvider $provider) {
+        parent::__construct($controller, $action, $provider);
+    }
+
+    protected function GetActionResult($returnValue) : IActionResult {
+        $result = new NonViewResult();
+        $result->SetResult($this->GetFileContents());
+        return $result;
+    }
+    
+    private function GetFileContents() : string {
+        global $rootPath;
+        $fileName = Directory::ScanRecursive($rootPath . "/Views", array($this->Controller->GetName(), $this->Action . ".php"));
+        return file_get_contents($fileName);
+    }
+}

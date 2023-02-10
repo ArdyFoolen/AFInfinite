@@ -2,6 +2,7 @@
 
 namespace AFInfinite\Core;
 use ReflectionClass;
+use ReflectionException;
 
 class Reflection {
     
@@ -28,10 +29,20 @@ class Reflection {
         return $reflect->getProperties();
     }
     
-    public static function Implements($object, string $interface) : bool {
+    public static function Implements($object, string $interface) {
         if (is_object($object) && class_implements($object)) {
             return isset(class_implements($object)[$interface]);
         }
         return false;
+    }
+
+    public static function ImplementsClass($className, string $interface) : bool {
+        try
+        {
+            $reflection = new ReflectionClass($className);
+            return $reflection->implementsInterface($interface);
+        } catch (ReflectionException) {
+            return false;
+        }
     }
 }

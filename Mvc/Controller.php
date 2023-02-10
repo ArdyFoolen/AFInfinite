@@ -15,8 +15,9 @@ class Controller implements IController {
     }
     
     public function CreateActionInvoker() : IActionInvoker {
-        $actionInvoker = new ActionInvoker($this, ParameterBinderProvider::UseProviderIni());
-        $actionInvoker->Initialize($this->RequestContext);
-        return $actionInvoker;
+        $factory = new ActionInvokerFactory();
+        $invoker = $factory->Create($this, $this->RequestContext->GetAction());
+        $invoker->Initialize($this->RequestContext);
+        return $invoker;
     }
 }
