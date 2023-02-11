@@ -2,6 +2,7 @@
     require __DIR__ . "/../Core/Directory.php";
     require __DIR__ . "/../Core/Activator.php";
     require __DIR__ . "/../Core/Reflection.php";
+    require __DIR__ . "/../Core/Bootstrap.php";
 
     require __DIR__ . "/../Mvc/Routing/IRouteHandler.php";
     require __DIR__ . "/../Mvc/Routing/Route.php";
@@ -24,6 +25,8 @@
 
     require __DIR__ . "/../Mvc/Rendering/IPageRenderer.php";
     require __DIR__ . "/../Mvc/Rendering/PageRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/IPageRendererFactory.php";
+    require __DIR__ . "/../Mvc/Rendering/PageRendererFactory.php";
 
     require __DIR__ . "/../Mvc/IParameterBinderProvider.php";
     require __DIR__ . "/../Mvc/ParameterBinderProvider.php";

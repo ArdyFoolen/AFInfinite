@@ -12,7 +12,8 @@ class HttpHandler implements IHttpHandler {
     public function ProcessRequest() {
         
         (new ControllerBuilder())
-                ->UseFactory()
+                ->UseRendererFactory()
+                ->UseControllerFactory()
                 ->WithRequestContext($this->RequestContext)
                 ->CreateController()
                 ->CreateActionInvoker()

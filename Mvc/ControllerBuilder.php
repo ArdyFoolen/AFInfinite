@@ -2,19 +2,27 @@
 
 namespace AFInfinite\Mvc;
 use AFInfinite\Mvc\Rendering\IPageRenderer;
-use AFInfinite\Mvc\Rendering\PageRenderer;
+use AFInfinite\Mvc\Rendering\IPageRendererFactory;
+use AFInfinite\Mvc\Rendering\PageRendererFactory;
+use AFInfinite\Core\Bootstrap;
 
 class ControllerBuilder {
     
     private static IControllerFactory $Default;
     private IControllerFactory $Current;
-    private REquestContext $RequestContext;
+    private RequestContext $RequestContext;
+    private IPageRendererFactory $RendererFactory;
     
     public static function SetDefault(IControllerFactory $factory) {
         self::$Default = $factory;
     }
     
-    public function UseFactory() : ControllerBuilder {
+    public function UseRendererFactory() : ControllerBuilder {
+        $this->RendererFactory = Bootstrap::GetInstance("AFInfinite\Mvc\Rendering\IPageRendererFactory");
+        return $this;
+    }
+    
+    public function UseControllerFactory() : ControllerBuilder {
         if (isset(self::$Default)) {
             $this->Current = self::$Default;
         }
@@ -46,7 +54,7 @@ class ControllerBuilder {
     public function Execute() {
         $actionInvoker = $this->RequestContext->GetActionInvoker();
         $actionResult = $actionInvoker->Execute();
-        $renderer = new PageRenderer($this->RequestContext->GetController()->GetName(), $this->RequestContext->GetAction(), $actionResult);
+        $renderer = $this->RendererFactory->Create($this->RequestContext->GetController()->GetName(), $this->RequestContext->GetAction(), $actionResult);
         $this->RequestContext->SetPageRenderer($renderer);
     }
 }
