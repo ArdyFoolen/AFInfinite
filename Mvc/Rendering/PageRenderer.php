@@ -30,9 +30,11 @@ class PageRenderer implements IPageRenderer {
 
     private function GetLayout() {
         global $rootPath;
-        $fileName = Directory::ScanRecursive($rootPath . "/Views", array($this->ControllerName, "Layout.php"));
+//        $fileName = Directory::ScanRecursive($rootPath . "/Views", array($this->ControllerName, "Layout.php"));
+        $fileName = Directory::ScanRecursive($rootPath . "/Views", array($this->ControllerName, "Layout.xhtml"));
         if ($fileName === false) {
-            $fileName = Directory::ScanRecursive($rootPath . "/Views", array("Shared", "Layout.php"));
+//            $fileName = Directory::ScanRecursive($rootPath . "/Views", array("Shared", "Layout.php"));
+            $fileName = Directory::ScanRecursive($rootPath . "/Views", array("Shared", "Layout.xhtml"));
             if ($fileName === false) {
                 throw new Exception();
             }

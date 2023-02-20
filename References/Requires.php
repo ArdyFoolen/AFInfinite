@@ -3,6 +3,8 @@
     require __DIR__ . "/../Core/Activator.php";
     require __DIR__ . "/../Core/Reflection.php";
     require __DIR__ . "/../Core/Bootstrap.php";
+    require __DIR__ . "/../Core/XmlParser.php";
+    require __DIR__ . "/../Core/IProcessingHandler.php";
 
     require __DIR__ . "/../Mvc/Routing/IRouteHandler.php";
     require __DIR__ . "/../Mvc/Routing/Route.php";
@@ -27,6 +29,13 @@
     require __DIR__ . "/../Mvc/Rendering/PageRenderer.php";
     require __DIR__ . "/../Mvc/Rendering/IPageRendererFactory.php";
     require __DIR__ . "/../Mvc/Rendering/PageRendererFactory.php";
+    require __DIR__ . "/../Mvc/Rendering/HtmlRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/HeadRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/MetaRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/TitleRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/LinkRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/BodyRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/LabelRenderer.php";
 
     require __DIR__ . "/../Mvc/IParameterBinderProvider.php";
     require __DIR__ . "/../Mvc/ParameterBinderProvider.php";
