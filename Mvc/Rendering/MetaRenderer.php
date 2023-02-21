@@ -3,12 +3,6 @@
 namespace AFInfinite\Mvc\Rendering;
 
 class MetaRenderer extends HtmlRenderer {
-
-    private array $Attributes;
-    
-    public function SetAttributes(array $attributes) {
-        $this->Attributes = $attributes;
-    }
     
     public function SetRenderer(HtmlRenderer $renderer) : bool {
         return false;
@@ -16,8 +10,10 @@ class MetaRenderer extends HtmlRenderer {
     
     public function Render() {
         $metaElement = "<meta";
-        foreach ($this->Attributes as $key => $value) {
-            $metaElement = $metaElement . " $key='$value'";
+        if (isset($this->attributes)) {
+            foreach ($this->Attributes as $key => $value) {
+                $metaElement = $metaElement . " $key='$value'";
+            }
         }
         $metaElement = $metaElement . ">";
         echo $metaElement;

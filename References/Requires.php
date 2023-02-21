@@ -29,6 +29,7 @@
     require __DIR__ . "/../Mvc/Rendering/PageRenderer.php";
     require __DIR__ . "/../Mvc/Rendering/IPageRendererFactory.php";
     require __DIR__ . "/../Mvc/Rendering/PageRendererFactory.php";
+    require __DIR__ . "/../Mvc/Rendering/HtmlBuilder.php";
     require __DIR__ . "/../Mvc/Rendering/HtmlRenderer.php";
     require __DIR__ . "/../Mvc/Rendering/HeadRenderer.php";
     require __DIR__ . "/../Mvc/Rendering/MetaRenderer.php";

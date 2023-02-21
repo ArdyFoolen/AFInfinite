@@ -6,8 +6,13 @@ class LabelRenderer extends HtmlRenderer {
     
     private string $Label;
     
-    public function __construct(string $label) {
-        $this->Label = $label;
+    public function SetValue(string $value) {
+        if (!isset($this->Label)) {
+            $this->Label = $value;
+        }
+        else {
+            $this->Label = $this->Label . $value;
+        }
     }
     
     public function SetRenderer(HtmlRenderer $renderer) : bool {

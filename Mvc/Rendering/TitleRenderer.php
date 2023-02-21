@@ -6,8 +6,8 @@ class TitleRenderer extends HtmlRenderer {
 
     private string $Title;
     
-    public function __construct(string $title) {
-        $this->Title = $title;
+    public function SetValue(string $value) {
+        $this->Title = $value;
     }
     
     public function SetRenderer(HtmlRenderer $renderer) : bool {

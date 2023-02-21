@@ -3,6 +3,7 @@
 namespace AFInfinite\Mvc;
 use AFInfinite\Core\Reflection;
 use AFInfinite\Core\Directory;
+use AFInfinite\Mvc\Rendering\HtmlBuilder;
 
 class ViewResult extends ActionResult {
         
@@ -12,9 +13,10 @@ class ViewResult extends ActionResult {
         $this->Model = $model;
     }
     
-    protected function RenderBody() {
-        global $rootPath;
-        $fileName = Directory::ScanRecursive($rootPath . "/Views", array($this->RequestContext->GetControllerName(), $this->RequestContext->GetAction() . ".php"));
-        require $fileName;
+    protected function RenderBody(HtmlBuilder $builder) {
+        $fileName = Directory::ScanRecursive("/Views", array($this->RequestContext->GetControllerName(), $this->RequestContext->GetAction() . ".xml"));
+        // require $fileName;
+        $builder->WithModel($this->Model)
+                ->WithXmlFile($fileName);
     }
 }

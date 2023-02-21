@@ -1,6 +1,7 @@
 <?php
 
 namespace AFInfinite\Mvc;
+use AFInfinite\Mvc\Rendering\HtmlBuilder;
 
 class NonViewResult extends ActionResult {
     
@@ -10,8 +11,7 @@ class NonViewResult extends ActionResult {
         $this->Result = $result;
     }
     
-    protected function RenderBody() {
+    protected function RenderBody(HtmlBuilder $builder) {
         echo $this->Result;
     }
-
 }

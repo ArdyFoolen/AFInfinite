@@ -5,8 +5,13 @@ namespace AFInfinite\Core;
 class XmlParser {
     
     private $Parser;
-    private IProcessingHandler $Handler;
     
+    public const StartEvent = "Start";
+    public const EndEvent = "End";
+    public const DataEvent = "Data";
+    public const ProcessEvent = "Process";
+    private array $EventHandler = [];
+
     public function __construct() {
         $this->Parser = xml_parser_create();
         
@@ -21,8 +26,8 @@ class XmlParser {
         unset($this->Parser);
     }
 
-    public function SetHandler(IProcessingHandler $handler) {
-        $this->Handler = $handler;
+    public function SetHandler(string $key, IProcessingHandler $handler) {
+        $this->EventHandler[$key] = $handler;
     }
     
     public function Parse($xmlData) {
@@ -39,23 +44,32 @@ class XmlParser {
     }
     
     private function StartHandler($parser, $tag, $attributes) {
-        echo "Start: " . $tag . "<br/>";
-        foreach ($attributes as $key => $value) {
-            echo " Attr: " . $key . " => " . $value . "<br/>";
+        // echo "Start: " . $tag . "<br/>";
+        // foreach ($attributes as $key => $value) {
+        //     echo " Attr: " . $key . " => " . $value . "<br/>";
+        // }
+        if (isset($this->EventHandler[XmlParser::StartEvent])) {
+            $this->EventHandler[XmlParser::StartEvent]->StartHandler($parser, $tag, $attributes);
         }
     }
     
     private function EndHandler($parser, $tag) {
-        echo "End:   " . $tag . "<br/>";
+        // echo "End:   " . $tag . "<br/>";
+        if (isset($this->EventHandler[XmlParser::EndEvent])) {
+            $this->EventHandler[XmlParser::EndEvent]->EndHandler($parser, $tag);
+        }
     }
     
     private function DataHandler($parser, $cdata) {
-        echo "Data:  " . $cdata . "<br/>";
+        // echo "Data:  " . $cdata . "<br/>";
+        if (isset($this->EventHandler[XmlParser::DataEvent])) {
+            $this->EventHandler[XmlParser::DataEvent]->DataHandler($parser, $cdata);
+        }
     }
     
     private function ProcessingHandler($parser, $target, $code) {
-        if (isset($this->Handler)) {
-            $this->Handler->Process($parser, $target, $code);
+        if (isset($this->EventHandler[XmlParser::ProcessEvent])) {
+            $this->EventHandler[XmlParser::ProcessEvent]->Process($parser, $target, $code);
         }
     }
 }

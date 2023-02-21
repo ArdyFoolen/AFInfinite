@@ -5,7 +5,8 @@ namespace AFInfinite\Mvc\Rendering;
 class HtmlRenderer {
     
     protected array $Children;
-    
+    protected array $Attributes;
+
     public function SetRenderer(HtmlRenderer $renderer) : bool {
         if ($renderer instanceof HeadRenderer) {
             $this->Children['Head'] = $renderer;
@@ -27,6 +28,14 @@ class HtmlRenderer {
         return false;
     }
     
+    public function SetValue(string $value) {
+
+    }
+    
+    public function SetAttributes(array $attributes) {
+        $this->Attributes = $attributes;
+    }
+
     public function Render() {
         echo "<!DOCTYPE html>";
         echo "<html>";

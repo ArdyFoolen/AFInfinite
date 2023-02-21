@@ -6,8 +6,8 @@ class LinkRenderer extends HtmlRenderer {
     
     private string $RelativeUrl;
     
-    public function __construct(string $relativeUrl) {
-        $this->RelativeUrl = $relativeUrl;
+    public function SetValue(string $value) {
+        $this->RelativeUrl = $value;
     }
     
     public function SetRenderer(HtmlRenderer $renderer) : bool {

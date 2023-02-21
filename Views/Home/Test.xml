@@ -1,0 +1,9 @@
+<body>
+<link>/Css/Body.css</link>
+<title>Test</title>
+<label>Test</label>
+<label>Id: <?php $this->Model->Id; ?></label>
+<label>Name: <?php $this->Model->Name; ?></label>
+<label>Address: <?php $this->Model->Address; ?></label>
+<label>Housenumber: <?php $this->Model->HouseNumber; ?></label>
+</body>
