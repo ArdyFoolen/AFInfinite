@@ -20,7 +20,7 @@ class LabelRenderer extends HtmlRenderer {
     }
     
     public function Render() {
-        $elem = "<div>$this->Label</div>";
+        $elem = "<div class='label'>$this->Label</div>";
         
         if (isset($this->Attributes)) {
             foreach ($this->Attributes as $attr => $value) {
@@ -28,22 +28,22 @@ class LabelRenderer extends HtmlRenderer {
                     case 'type':
                         switch (strtolower($value)) {
                             case 'header1':
-                                $elem = "<h1>$this->Label</h1>";
+                                $elem = "<h1 class='label'>$this->Label</h1>";
                                 break;
                             case 'header2':
-                                $elem = "<h2>$this->Label</h2>";
+                                $elem = "<h2 class='label'>$this->Label</h2>";
                                 break;
                             case 'header3':
-                                $elem = "<h3>$this->Label</h3>";
+                                $elem = "<h3 class='label'>$this->Label</h3>";
                                 break;
                             case 'header4':
-                                $elem = "<h4>$this->Label</h4>";
+                                $elem = "<h4 class='label'>$this->Label</h4>";
                                 break;
                             case 'header5':
-                                $elem = "<h5>$this->Label</h5>";
+                                $elem = "<h5 class='label'>$this->Label</h5>";
                                 break;
                             case 'header6':
-                                $elem = "<h6>$this->Label</h6>";
+                                $elem = "<h6 class='label'>$this->Label</h6>";
                                 break;
                         }
                         break;

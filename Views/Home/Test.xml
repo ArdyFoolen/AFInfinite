@@ -7,8 +7,14 @@
 <FlexContainer>
     <FlexItem>
         <label>Id: <?php $this->Model->Id; ?></label>
+    </FlexItem>
+    <FlexItem>
         <label>Name: <?php $this->Model->Name; ?></label>
+    </FlexItem>
+    <FlexItem>
         <label>Address: <?php $this->Model->Address; ?></label>
+    </FlexItem>
+    <FlexItem>
         <label>Housenumber: <?php $this->Model->HouseNumber; ?></label>
     </FlexItem>
 </FlexContainer>

@@ -1,16 +1,79 @@
+@mixin flexbox() {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+  
+@mixin flex($values) {
+    -webkit-box-flex: $values;
+    -moz-box-flex:  $values;
+    -webkit-flex:  $values;
+    -ms-flex:  $values;
+    flex:  $values;
+}
+  
+@mixin order($val) {
+    -webkit-box-ordinal-group: $val;  
+    -moz-box-ordinal-group: $val;     
+    -ms-flex-order: $val;     
+    -webkit-order: $val;  
+    order: $val;
+}
+  
+.wrapper {
+    @include flexbox();
+}
+  
+.item {
+    @include flex(1 200px);
+    @include order(2);
+}
+
 body {
     background-color: lightblue;
 }
 
+/* Large */
 .flexcontainer {
     display: flex;
-    height: 300px; /* Or whatever */
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    /* align-items: flex-start; */
+    gap: 10px;
+    padding: 10px;
+    /* height: 300px; Or whatever */
     background-color: aqua;
 }
   
+/* Medium screens */
+@media all and (max-width: 800px) {
+    .flexcontainer {
+      /* When on medium sized screens, we center it by evenly distributing empty space around items */
+      justify-content: space-around;
+    }
+}
+  
+/* Small screens */
+@media all and (max-width: 500px) {
+    .flexcontainer {
+      /* On small screens, we are no longer using row direction but column */
+      flex-direction: column;
+    }
+}
+
 .flexitem {
-    width: 100px;  /* Or whatever */
-    height: 100px; /* Or whatever */
-    margin: auto;  /* Magic! */
+    /* width: 100px;  Or whatever */
+    /* height: 100px; Or whatever */
+    /* margin: auto;  Center! */
+    /* width: 100%; */
+    padding: 10px;
     background-color: beige;
+    width: 25%;
+}
+
+.label {
+    width: 100%;
 }
