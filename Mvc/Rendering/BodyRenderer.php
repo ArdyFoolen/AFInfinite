@@ -9,6 +9,10 @@ class BodyRenderer extends HtmlRenderer {
             $this->Children[] = $renderer;
             return true;
         }
+        if ($renderer instanceof FlexContainerRenderer) {
+            $this->Children['FlexContainer'] = $renderer;
+            return true;
+        }
         return $this->SetChild($renderer);
     }
     

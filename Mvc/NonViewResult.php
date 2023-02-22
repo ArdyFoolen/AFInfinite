@@ -12,6 +12,6 @@ class NonViewResult extends ActionResult {
     }
     
     protected function RenderBody(HtmlBuilder $builder) {
-        echo $this->Result;
+        $builder->WithXml($this->Result);
     }
 }

@@ -15,7 +15,6 @@ class ViewResult extends ActionResult {
     
     protected function RenderBody(HtmlBuilder $builder) {
         $fileName = Directory::ScanRecursive("/Views", array($this->RequestContext->GetControllerName(), $this->RequestContext->GetAction() . ".xml"));
-        // require $fileName;
         $builder->WithModel($this->Model)
                 ->WithXmlFile($fileName);
     }

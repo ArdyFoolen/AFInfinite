@@ -37,6 +37,8 @@
     require __DIR__ . "/../Mvc/Rendering/LinkRenderer.php";
     require __DIR__ . "/../Mvc/Rendering/BodyRenderer.php";
     require __DIR__ . "/../Mvc/Rendering/LabelRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/FlexContainerRenderer.php";
+    require __DIR__ . "/../Mvc/Rendering/FlexItemRenderer.php";
 
     require __DIR__ . "/../Mvc/IParameterBinderProvider.php";
     require __DIR__ . "/../Mvc/ParameterBinderProvider.php";

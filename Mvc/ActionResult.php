@@ -24,11 +24,6 @@ abstract class ActionResult implements IActionResult, IProcessingHandler {
         $this->RenderBody($builder);
         $htmlRenderer = $builder->Build();
         $htmlRenderer->Render();
-
-        // $parser = new XmlParser();
-        // $parser->SetHandler(XmlParser::ProcessEvent, $this);
-        // $parser->ParseFile($this->LayoutFileName);
-        // $this->RenderBody();
     }
 
     public function StartHandler($parser, $tag, $attributes) {}

@@ -44,24 +44,18 @@ class XmlParser {
     }
     
     private function StartHandler($parser, $tag, $attributes) {
-        // echo "Start: " . $tag . "<br/>";
-        // foreach ($attributes as $key => $value) {
-        //     echo " Attr: " . $key . " => " . $value . "<br/>";
-        // }
         if (isset($this->EventHandler[XmlParser::StartEvent])) {
             $this->EventHandler[XmlParser::StartEvent]->StartHandler($parser, $tag, $attributes);
         }
     }
     
     private function EndHandler($parser, $tag) {
-        // echo "End:   " . $tag . "<br/>";
         if (isset($this->EventHandler[XmlParser::EndEvent])) {
             $this->EventHandler[XmlParser::EndEvent]->EndHandler($parser, $tag);
         }
     }
     
     private function DataHandler($parser, $cdata) {
-        // echo "Data:  " . $cdata . "<br/>";
         if (isset($this->EventHandler[XmlParser::DataEvent])) {
             $this->EventHandler[XmlParser::DataEvent]->DataHandler($parser, $cdata);
         }

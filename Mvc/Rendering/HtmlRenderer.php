@@ -21,7 +21,7 @@ class HtmlRenderer {
     
     protected function SetChild(HtmlRenderer $renderer) : bool {
         foreach ($this->Children as $child)  {
-            if ($child->SetRenderer($renderer)) {
+            if (!is_array($child) && $child->SetRenderer($renderer)) {
                 return true;
             }
         }

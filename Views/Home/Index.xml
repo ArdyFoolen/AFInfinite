@@ -1,5 +1,5 @@
 <body>
 <link>/Css/Body.css</link>
 <title>Home</title>
-<label>Home</label>
+<label type="header1">Home</label>
 </body>

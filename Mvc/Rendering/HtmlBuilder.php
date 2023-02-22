@@ -7,6 +7,8 @@ use AFInfinite\Mvc\Rendering\MetaRenderer;
 use AFInfinite\Mvc\Rendering\TitleRenderer;
 use AFInfinite\Mvc\Rendering\LinkRenderer;
 use AFInfinite\Mvc\Rendering\BodyRenderer;
+use AFInfinite\Mvc\Rendering\FlexContainerRenderer;
+use AFInfinite\Mvc\Rendering\FlexItemRenderer;
 use AFInfinite\Mvc\Rendering\LabelRenderer;
 
 use AFInfinite\Core\XmlParser;
@@ -27,6 +29,17 @@ class HtmlBuilder implements IProcessingHandler {
         $this->CurrentRenderer[] = $this->HtmlRenderer;
     }
 
+    private function CreateParser() : XmlParser {
+        $parser = new XmlParser();
+        $parser->SetHandler(XmlParser::StartEvent, $this);
+        $parser->SetHandler(XmlParser::EndEvent, $this);
+        $parser->SetHandler(XmlParser::DataEvent, $this);
+        if (isset($this->Model)) {
+            $parser->SetHandler(XmlParser::ProcessEvent, $this);
+        }
+        return $parser;
+    }
+
     public function WithModel(object $model) : HtmlBuilder {
         $this->Model = $model;
 
@@ -35,17 +48,15 @@ class HtmlBuilder implements IProcessingHandler {
 
     public function WithXmlFile($fileName) : HtmlBuilder {
         global $rootPath;
-
         $this->SetRenderer();
+        $this->CreateParser()->ParseFile($rootPath . $fileName);
 
-        $parser = new XmlParser();
-        $parser->SetHandler(XmlParser::StartEvent, $this);
-        $parser->SetHandler(XmlParser::EndEvent, $this);
-        $parser->SetHandler(XmlParser::DataEvent, $this);
-        if (isset($this->Model)) {
-            $parser->SetHandler(XmlParser::ProcessEvent, $this);
-        }
-        $parser->ParseFile($rootPath . $fileName);
+        return $this;
+    }
+
+    public function WithXml($xmlData) : HtmlBuilder {
+        $this->SetRenderer();
+        $this->CreateParser()->Parse($xmlData);
 
         return $this;
     }
@@ -88,10 +99,21 @@ class HtmlBuilder implements IProcessingHandler {
                 $this->CurrentRenderer[] = new BodyRenderer();
                 $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
                 break;
+            case "flexcontainer" :
+                $this->CurrentRenderer[] = new FlexContainerRenderer();
+                $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetAttributes($attributes);
+                break;
+            case "flexitem" :
+                $this->CurrentRenderer[] = new FlexItemRenderer();
+                $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetAttributes($attributes);
+                break;
             case "label" :
                 $labelRenderer = new LabelRenderer();
                 $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetRenderer($labelRenderer);
                 $this->CurrentRenderer[] = $labelRenderer;
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetAttributes($attributes);
                 break;
         }
     }

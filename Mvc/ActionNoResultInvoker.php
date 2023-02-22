@@ -15,7 +15,8 @@ class ActionNoResultInvoker extends ActionInvoker {
     }
     
     private function GetFileContents() : string {
+        global $rootPath;
         $fileName = Directory::ScanRecursive("/Views", array($this->Controller->GetName(), $this->Action . ".xml"));
-        return file_get_contents($fileName);
+        return file_get_contents($rootPath . $fileName);
     }
 }

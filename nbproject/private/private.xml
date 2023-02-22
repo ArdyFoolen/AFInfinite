@@ -3,21 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/AFInfinite/References/Requires.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Mvc/Rendering/LinkRenderer.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Views/Home/Layout.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Mvc/NonViewResult.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Mvc/Rendering/HeadRenderer.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Mvc/ViewResult.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Mvc/Rendering/BodyRenderer.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Views/Shared/Layout.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Views/Home/Index.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Views/Shared/Layout.xhtml</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Core/XmlParser.php</file>
             <file>file:/C:/xampp/htdocs/AFInfinite/index.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Mvc/Rendering/PageRenderer.php</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Css/Body.css</file>
-            <file>file:/C:/xampp/htdocs/AFInfinite/Mvc/ActionResult.php</file>
+            <file>file:/C:/xampp/htdocs/AFInfinite/Mvc/Rendering/HtmlRenderer.php</file>
+            <file>file:/C:/xampp/htdocs/AFInfinite/Mvc/Rendering/HtmlBuilder.php</file>
         </group>
     </open-files>
 </project-private>
