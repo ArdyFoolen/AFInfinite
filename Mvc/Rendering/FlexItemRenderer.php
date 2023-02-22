@@ -10,7 +10,7 @@ class FlexItemRenderer extends HtmlRenderer {
     }
     
     public function Render() {
-        echo "<div class='child'>";
+        echo "<div class='flexitem'>";
         if (isset($this->Children)) {
             foreach ($this->Children as $child) {
                 $child->Render();
