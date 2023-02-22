@@ -43,6 +43,7 @@ body {
     flex-wrap: wrap;
     /* align-items: flex-start; */
     gap: 10px;
+    margin: 0px;
     padding: 10px;
     /* height: 300px; Or whatever */
     background-color: aqua;
@@ -69,6 +70,7 @@ body {
     /* height: 100px; Or whatever */
     /* margin: auto;  Center! */
     /* width: 100%; */
+    margin: 0px;
     padding: 10px;
     background-color: beige;
     width: 25%;
