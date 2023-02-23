@@ -1,0 +1,9 @@
+.flexcontainer {
+    justify-content: flex-start;
+    flex-direction: row;
+}
+  
+.flexitem {
+    flex-direction: row;
+    width: calc(25% - 20px);
+}

@@ -4,5 +4,9 @@
         <metas>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
         </metas>
+        <link media="screen">/Css/Main.css</link>
+        <link media="screen and (max-width:500px)">/Css/Mobile/Body.css</link>
+        <link media="screen and (min-width:500px and max-width:800px)">/Css/Tablet/Body.css</link>
+        <link media="screen and (min-width:800px)">/Css/Desktop/Body.css</link>
     </head>
 </html>

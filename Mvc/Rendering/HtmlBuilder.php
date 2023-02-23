@@ -94,6 +94,7 @@ class HtmlBuilder implements IProcessingHandler {
             case "link" :
                 $this->CurrentRenderer[] = new LinkRenderer();
                 $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetAttributes($attributes);
                 break;
             case "body" :
                 $this->CurrentRenderer[] = new BodyRenderer();

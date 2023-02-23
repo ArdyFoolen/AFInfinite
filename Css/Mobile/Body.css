@@ -1,0 +1,9 @@
+.flexcontainer {
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.flexitem {
+    flex-direction: column;
+    width: calc(100% - 20px);
+}

@@ -1,5 +1,4 @@
 <body>
-<link>/Css/Body.css</link>
 <title>Test</title>
 
 <label type="header1">Test</label>
@@ -16,6 +15,9 @@
     </FlexItem>
     <FlexItem>
         <label>Housenumber: <?php $this->Model->HouseNumber; ?></label>
+    </FlexItem>
+    <FlexItem>
+        <label>Some extra content that I want to scroll</label>
     </FlexItem>
 </FlexContainer>
 </body>

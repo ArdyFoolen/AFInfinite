@@ -16,6 +16,12 @@ class LinkRenderer extends HtmlRenderer {
     
     public function Render() {
         global $baseUrl;
-        echo "<link rel='stylesheet' href='$baseUrl$this->RelativeUrl'>";
+        $attribute = "";
+        if (isset($this->Attributes)) {
+            foreach ($this->Attributes as $attr => $value) {
+                $attribute = $attribute . $attr . '="' . $value . '"';
+            }
+        }
+        echo "<link rel='stylesheet' href='$baseUrl$this->RelativeUrl'$attribute>";
     }
 }
