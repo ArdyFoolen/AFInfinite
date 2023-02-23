@@ -21,7 +21,6 @@ class HeadRenderer extends HtmlRenderer {
     }
     
     public function Render() {
-        global $baseUrl;
         echo "<head>";
         if (isset($this->Children['Meta'])) {
             foreach ($this->Children['Meta'] as $meta)

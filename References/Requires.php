@@ -1,4 +1,5 @@
 <?php
+    require __DIR__ . "/../Globals.php";
     require __DIR__ . "/../Core/Directory.php";
     require __DIR__ . "/../Core/Activator.php";
     require __DIR__ . "/../Core/Reflection.php";

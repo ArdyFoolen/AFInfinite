@@ -1,13 +1,9 @@
 <?php
+    // debug first time start browser with the query string XDEBUG_SESSION_START=netbeans-xdebug
+    // https://localhost:4443/AFInfinite/home/index?XDEBUG_SESSION_START=netbeans-xdebug
+
     require __DIR__ . '/References/Requires.php';
-    use AFInfinite\Mvc\Routing\RouteTable;
     use AFInfinite\Mvc\AFInfiniteApp;
-
-    $rootPath = __DIR__;
-
-    $hostName = $_SERVER['HTTP_HOST'];
-    $splits = explode("htdocs", str_replace("\\", "/", $rootPath));
-    $baseUrl = "https://" . $hostName . $splits[1];
     
     $app = new AFInfiniteApp();
     $app->Run();
