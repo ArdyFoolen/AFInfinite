@@ -1,0 +1,13 @@
+<Renderers>
+    <html>
+        <head>head</head>
+        <body>body</body>
+    </html>
+    <body>
+        <label>label</label>
+        <FlexContainer>flexcontainer</FlexContainer>
+    </body>
+    <FlexContainer>
+        <FlexItem>flexitem</FlexItem>
+    </FlexContainer>
+</Renderers>

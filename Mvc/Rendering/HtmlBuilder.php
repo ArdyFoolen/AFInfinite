@@ -16,6 +16,7 @@ use AFInfinite\Core\IProcessingHandler;
 
 class HtmlBuilder implements IProcessingHandler {
     
+    private RenderingTemplate $Template;
     private HtmlRenderer $HtmlRenderer;
     private array $CurrentRenderer;
     private object $Model;
@@ -25,7 +26,10 @@ class HtmlBuilder implements IProcessingHandler {
             return;
         }
 
+        $this->Template = new RenderingTemplate();
+        $this->Template->Load();
         $this->HtmlRenderer = new HtmlRenderer();
+        $this->HtmlRenderer->SetTemplate($this->Template);
         $this->CurrentRenderer[] = $this->HtmlRenderer;
     }
 
@@ -80,38 +84,46 @@ class HtmlBuilder implements IProcessingHandler {
         switch (strtolower($tag)) {
             case "head" :
                 $this->CurrentRenderer[] = new HeadRenderer();
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetTemplate($this->Template);
                 $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
                 break;
             case "meta" :
                 $this->CurrentRenderer[] = new MetaRenderer();
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetTemplate($this->Template);
                 $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
                 $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetAttributes($attributes);
                 break;
             case "title" :
                 $this->CurrentRenderer[] = new TitleRenderer();
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetTemplate($this->Template);
                 $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
                 break;
             case "link" :
                 $this->CurrentRenderer[] = new LinkRenderer();
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetTemplate($this->Template);
                 $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
                 $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetAttributes($attributes);
                 break;
             case "body" :
                 $this->CurrentRenderer[] = new BodyRenderer();
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetTemplate($this->Template);
                 $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
                 break;
             case "flexcontainer" :
                 $this->CurrentRenderer[] = new FlexContainerRenderer();
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetTemplate($this->Template);
                 $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
                 $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetAttributes($attributes);
                 break;
             case "flexitem" :
                 $this->CurrentRenderer[] = new FlexItemRenderer();
+                $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetTemplate($this->Template);
                 $this->HtmlRenderer->SetRenderer($this->CurrentRenderer[array_key_last($this->CurrentRenderer)]);
                 $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetAttributes($attributes);
                 break;
             case "label" :
                 $labelRenderer = new LabelRenderer();
+                $labelRenderer->SetTemplate($this->Template);
                 $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetRenderer($labelRenderer);
                 $this->CurrentRenderer[] = $labelRenderer;
                 $this->CurrentRenderer[array_key_last($this->CurrentRenderer)]->SetAttributes($attributes);

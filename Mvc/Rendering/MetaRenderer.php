@@ -4,6 +4,8 @@ namespace AFInfinite\Mvc\Rendering;
 
 class MetaRenderer extends HtmlRenderer {
     
+    protected string $TypeName = 'Meta';
+
     public function SetRenderer(HtmlRenderer $renderer) : bool {
         return false;
     }

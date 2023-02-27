@@ -4,6 +4,7 @@ namespace AFInfinite\Mvc\Rendering;
 
 class LinkRenderer extends HtmlRenderer {
     
+    protected string $TypeName = 'Link';
     private string $RelativeUrl;
     
     public function SetValue(string $value) {

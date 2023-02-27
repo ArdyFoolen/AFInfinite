@@ -4,6 +4,7 @@ namespace AFInfinite\Mvc\Rendering;
 
 class LabelRenderer extends HtmlRenderer {
     
+    protected string $TypeName = 'Label';
     private string $Label;
     
     public function SetValue(string $value) {
@@ -20,37 +21,42 @@ class LabelRenderer extends HtmlRenderer {
     }
     
     public function Render() {
-        $elem = "<div class='label'>$this->Label</div>";
-        
-        if (isset($this->Attributes)) {
-            foreach ($this->Attributes as $attr => $value) {
-                switch (strtolower($attr)) {
-                    case 'type':
-                        switch (strtolower($value)) {
-                            case 'header1':
-                                $elem = "<h1 class='label'>$this->Label</h1>";
-                                break;
-                            case 'header2':
-                                $elem = "<h2 class='label'>$this->Label</h2>";
-                                break;
-                            case 'header3':
-                                $elem = "<h3 class='label'>$this->Label</h3>";
-                                break;
-                            case 'header4':
-                                $elem = "<h4 class='label'>$this->Label</h4>";
-                                break;
-                            case 'header5':
-                                $elem = "<h5 class='label'>$this->Label</h5>";
-                                break;
-                            case 'header6':
-                                $elem = "<h6 class='label'>$this->Label</h6>";
-                                break;
-                        }
-                        break;
-                }
+        $builder = new HtmlElementBuilder();
+        if (isset($this->Attributes['TYPE'])) {
+            switch ($this->Attributes['TYPE']) {
+                case 'header1':
+                    $builder->StartElement("h1");
+                    break;
+                case 'header2':
+                    $builder->StartElement("h2");
+                    break;
+                case 'header3':
+                    $builder->StartElement("h3");
+                    break;
+                case 'header4':
+                    $builder->StartElement("h4");
+                    break;
+                case 'header5':
+                    $builder->StartElement("h5");
+                    break;
+                case 'header6':
+                    $builder->StartElement("h6");
+                    break;
+                default:
+                    $builder->StartElement("div");
+                    break;
             }
         }
+        else {
+            $builder->StartElement("div");
+        }
+
+        if (isset($this->Attributes['TEXT-ALIGN'])) {
+            $builder->AddStyle("text-align:" . $this->Attributes['TEXT-ALIGN']);
+        }
  
-        echo $elem;
+        echo $builder->AddClass("label")
+                     ->WithValue($this->Label)
+                     ->Build();
     }
 }

@@ -14,7 +14,7 @@
         <label>Address: <?php $this->Model->Address; ?></label>
     </FlexItem>
     <FlexItem>
-        <label>Housenumber: <?php $this->Model->HouseNumber; ?></label>
+        <label text-align='center'>Housenumber: <?php $this->Model->HouseNumber; ?></label>
     </FlexItem>
     <FlexItem>
         <label>Some extra content that I want to scroll</label>
