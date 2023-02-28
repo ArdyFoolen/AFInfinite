@@ -11,10 +11,6 @@ class LinkRenderer extends HtmlRenderer {
         $this->RelativeUrl = $value;
     }
     
-    public function SetRenderer(HtmlRenderer $renderer) : bool {
-        return false;
-    }
-    
     public function Render() {
         global $baseUrl;
         $attribute = "";

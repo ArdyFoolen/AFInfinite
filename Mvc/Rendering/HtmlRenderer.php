@@ -8,11 +8,13 @@ class HtmlRenderer {
     protected string $TypeName = 'Html';
     protected array $Children;
     protected array $Attributes;
-    protected static $IsArray = false;
 
-	public static function GetIsArray()
-	{
-		return static::$IsArray;
+	public function GetIsArray() : bool {
+        return $this->Template->IsArray($this->GetTypeName());
+	}
+
+    public function GetIsSingle() {
+        return $this->Template->IsSingle($this->GetTypeName());
 	}
 
     public function SetTemplate(RenderingTemplate $template) {
@@ -35,7 +37,7 @@ class HtmlRenderer {
         $current = $this->GetTypeName();
         $child = $renderer->GetTypeName();
         if ($this->Template->IsChildOf($current, $child)) {
-            if ($this->GetIsArray()) {
+            if ($this->GetIsArray() && !$renderer->GetIsSingle()) {
                 $this->Children[$child][] = $renderer;
             }
             else {
@@ -47,9 +49,11 @@ class HtmlRenderer {
     }
 
     protected function SetChild(HtmlRenderer $renderer) : bool {
-        foreach ($this->Children as $child)  {
-            if (!is_array($child) && $child->SetRenderer($renderer)) {
-                return true;
+        if (isset($this->Children) && is_array($this->Children)) {
+            foreach ($this->Children as $child)  {
+                if (!is_array($child) && $child->SetRenderer($renderer)) {
+                    return true;
+                }
             }
         }
         return false;

@@ -5,22 +5,6 @@ namespace AFInfinite\Mvc\Rendering;
 class HeadRenderer extends HtmlRenderer {
     
     protected string $TypeName = 'Head';
-
-    public function SetRenderer(HtmlRenderer $renderer) : bool {
-        if ($renderer instanceof MetaRenderer) {
-            $this->Children['Meta'][] = $renderer;
-                return true;
-        }
-        if ($renderer instanceof TitleRenderer) {
-            $this->Children['Title'] = $renderer;
-            return true;
-        }
-        if ($renderer instanceof LinkRenderer) {
-            $this->Children['Link'][] = $renderer;
-            return true;
-        }
-        return $this->SetChild($renderer);
-    }
     
     public function Render() {
         echo "<head>";

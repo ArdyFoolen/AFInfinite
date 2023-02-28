@@ -3,11 +3,21 @@
         <head>head</head>
         <body>body</body>
     </html>
+    <head IsArray='true'>
+        <meta>meta</meta>
+        <link>link</link>
+        <title>title</title>
+    </head>
+    <title IsSingle='true'>title</title>
     <body>
         <label>label</label>
         <FlexContainer>flexcontainer</FlexContainer>
     </body>
-    <FlexContainer>
+    <FlexContainer IsArray='true'>
         <FlexItem>flexitem</FlexItem>
     </FlexContainer>
+    <FlexItem>
+        <label>label</label>
+        <FlexContainer>flexcontainer</FlexContainer>
+    </FlexItem>
 </Renderers>

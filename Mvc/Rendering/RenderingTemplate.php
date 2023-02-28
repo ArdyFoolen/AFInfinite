@@ -26,6 +26,22 @@ class RenderingTemplate {
     //     print_r($this->Xml);
     }
 
+    public function IsArray(string $element) : bool {
+        $xmlElement = $this->GetAtribute($element, 'IsArray');
+        if (isset($xmlElement)) {
+            return filter_var($xmlElement, FILTER_VALIDATE_BOOLEAN);
+        }
+        return false;
+    }
+
+    public function IsSingle(string $element) : bool {
+        $xmlElement = $this->GetAtribute($element, 'IsSingle');
+        if (isset($xmlElement)) {
+            return filter_var($xmlElement, FILTER_VALIDATE_BOOLEAN);
+        }
+        return false;
+    }
+
     public function IsChildOf(string $parent, string $child) : bool {
         $name = $this->Xml->getName();
         foreach ($this->Xml as $pKey => $pValue) {
@@ -38,6 +54,19 @@ class RenderingTemplate {
             }
         }
         return false;
+    }
+
+    private function GetAtribute(string $element, string $elementName) {
+        $name = $this->Xml->getName();
+        foreach ($this->Xml as $pKey => $pValue) {
+            if (strtolower($pKey) === strtolower($element)) {
+                $attr = $pValue->attributes();
+                if (isset($attr) && isset($attr[$elementName])) {
+                    return $attr[$elementName];
+                }
+            }
+        }
+        return null;
     }
 
     // private function Log(SimpleXMLElement $element) {

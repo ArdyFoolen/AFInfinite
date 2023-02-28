@@ -10,11 +10,7 @@ class TitleRenderer extends HtmlRenderer {
     public function SetValue(string $value) {
         $this->Title = $value;
     }
-    
-    public function SetRenderer(HtmlRenderer $renderer) : bool {
-        return false;
-    }
-    
+     
     public function Render() {
         echo "<title>$this->Title</title>";
     }

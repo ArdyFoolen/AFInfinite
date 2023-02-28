@@ -16,10 +16,6 @@ class LabelRenderer extends HtmlRenderer {
         }
     }
     
-    public function SetRenderer(HtmlRenderer $renderer) : bool {
-        return false;
-    }
-    
     public function Render() {
         $builder = new HtmlElementBuilder();
         if (isset($this->Attributes['TYPE'])) {
