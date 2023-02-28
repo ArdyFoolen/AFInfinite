@@ -2,6 +2,7 @@
 
 namespace AFInfinite\Mvc\Routing;
 use AFInfinite\Mvc\RequestContext;
+use Exception;
 
 class MatchingRouteEntry {
     

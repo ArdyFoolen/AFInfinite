@@ -1,6 +1,7 @@
 <?php
 
 namespace AFInfinite\Mvc\Routing;
+use Exception;
 
 class RouteCollection {
     

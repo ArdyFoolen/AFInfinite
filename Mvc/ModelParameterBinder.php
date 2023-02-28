@@ -4,6 +4,7 @@ namespace AFInfinite\Mvc;
 use ReflectionParameter;
 use AFInfinite\Core\Activator;
 use AFInfinite\Core\Reflection;
+use Exception;
 
 class ModelParameterBinder extends ParameterBinder {
     public function Bind(array $urlParameters, ReflectionParameter $param, array &$binds) {

@@ -5,6 +5,7 @@ use AFInfinite\Core\Reflection;
 use AFInfinite\Mvc\RequestContext;
 use AFInfinite\Core\Directory;
 use AFInfinite\Mvc\IActionResult;
+use Exception;
 
 class PageRenderer implements IPageRenderer {
     

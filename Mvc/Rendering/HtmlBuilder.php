@@ -14,6 +14,8 @@ use AFInfinite\Mvc\Rendering\LabelRenderer;
 use AFInfinite\Core\XmlParser;
 use AFInfinite\Core\IProcessingHandler;
 
+use Exception;
+
 class HtmlBuilder implements IProcessingHandler {
     
     private RenderingTemplate $Template;

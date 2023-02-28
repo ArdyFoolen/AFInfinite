@@ -3,6 +3,7 @@
 namespace AFInfinite\Mvc\Rendering;
 
 use SimpleXMLElement;
+use Exception;
 
 class RenderingTemplate {
 
@@ -15,7 +16,7 @@ class RenderingTemplate {
         }
 
         global $rootPath;
-        $fileName = $rootPath . '\Mvc\Rendering\RenderingTemplate.xml';
+        $fileName = $rootPath . '/Mvc/Rendering/RenderingTemplate.xml';
         if (file_exists($fileName)) {
             $this->Xml = simplexml_load_file($fileName);
         } else {

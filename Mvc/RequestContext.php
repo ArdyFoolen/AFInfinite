@@ -4,6 +4,7 @@ namespace AFInfinite\Mvc;
 use AFInfinite\Mvc\Routing\MatchingRouteEntry;
 use AFInfinite\Mvc\Routing\Route;
 use AFInfinite\Mvc\Rendering\IPageRenderer;
+use Exception;
 
 class RequestContext {
     

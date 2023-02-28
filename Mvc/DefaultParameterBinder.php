@@ -2,6 +2,7 @@
 
 namespace AFInfinite\Mvc;
 use ReflectionParameter;
+use Exception;
 
 class DefaultParameterBinder extends ParameterBinder {
     public function Bind(array $urlParameters, ReflectionParameter $param, array &$binds) {
