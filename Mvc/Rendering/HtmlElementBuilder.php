@@ -74,7 +74,7 @@ class HtmlElementBuilder {
         foreach ($this->Styles as $key => $style) {
             $this->Result = $this->Result . $style;
 
-            if (!str_contains($style, ";")) {
+            if (!strpos($style, ";")) {
                 $this->Result = $this->Result . ";";
             }
 
